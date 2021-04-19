@@ -1,0 +1,9 @@
+Difference in X = 20
+Difference in Y = 1
+
+Rotation for more than 15 cards = 5
+Rotation for less than 15 cards = 10
+
+Center Most card Rotation = 0
+
+-ve roation on other side

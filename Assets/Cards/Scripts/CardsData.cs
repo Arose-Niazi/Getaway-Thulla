@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CardsData : MonoBehaviour
 {
@@ -50,6 +52,8 @@ public class CardsData : MonoBehaviour
 	public Card AceOfHearts  ;
 	public Card AceOfDiamonds;
 	public Card AceOfClovers ;
+
+	private ArrayList cards = new ArrayList();
 
 	private void Awake()
 	{
@@ -119,6 +123,90 @@ public class CardsData : MonoBehaviour
 	    AceOfHearts   = new Card("Ace of Hearts",         AH,        14,        Decks.HEART);
 	    AceOfDiamonds = new Card("Ace of Diamonds",       AD,        14,        Decks.DIAMOND);
 	    AceOfClovers  = new Card("Ace of Clovers",        AC,        14,        Decks.CLOVER);
+	    
+	}
+
+
+	public void Start()
+	{
+		ResetCards();
+	}
+
+	public void ResetCards()
+	{
+		cards.Add(KingOfSpades);
+		cards.Add(KingOfHearts);
+		cards.Add(KingOfDiamonds);
+		cards.Add(KingOfClovers);
+		
+		cards.Add(QueenOfSpades);
+		cards.Add(QueenOfHearts);
+		cards.Add(QueenOfDiamonds);
+		cards.Add(QueenOfClovers);
+		
+		cards.Add(JackOfSpades);
+		cards.Add(JackOfHearts);
+		cards.Add(JackOfDiamonds);
+		cards.Add(JackOfClovers);
+		
+		cards.Add(TenOfSpades);
+		cards.Add(TenOfHearts);
+		cards.Add(TenOfDiamonds);
+		cards.Add(TenOfClovers);
+		
+		cards.Add(NineOfSpades);
+		cards.Add(NineOfHearts);
+		cards.Add(NineOfDiamonds);
+		cards.Add(NineOfClovers);
+		
+		cards.Add(EightOfSpades);
+		cards.Add(EightOfHearts);
+		cards.Add(EightOfDiamonds);
+		cards.Add(EightOfClovers);
+		
+		cards.Add(SevenOfSpades);
+		cards.Add(SevenOfHearts);
+		cards.Add(SevenOfDiamonds);
+		cards.Add(SevenOfClovers);
+		
+		cards.Add(SixOfSpades);
+		cards.Add(SixOfHearts);
+		cards.Add(SixOfDiamonds);
+		cards.Add(SixOfClovers);
+		
+		cards.Add(FiveOfSpades);
+		cards.Add(FiveOfHearts);
+		cards.Add(FiveOfDiamonds);
+		cards.Add(FiveOfClovers);
+		
+		cards.Add(FourOfSpades);
+		cards.Add(FourOfHearts);
+		cards.Add(FourOfDiamonds);
+		cards.Add(FourOfClovers);
+		
+		cards.Add(ThreeOfSpades);
+		cards.Add(ThreeOfHearts);
+		cards.Add(ThreeOfDiamonds);
+		cards.Add(ThreeOfClovers);
+		
+		cards.Add(TwoOfSpades);
+		cards.Add(TwoOfHearts);
+		cards.Add(TwoOfDiamonds);
+		cards.Add(TwoOfClovers);
+		
+		cards.Add(AceOfSpades);
+		cards.Add(AceOfHearts);
+		cards.Add(AceOfDiamonds);
+		cards.Add(AceOfClovers);
+	}
+
+	public Card GetRandomCard()
+	{
+		if (cards.Count < 1) return null;
+		int x = Random.Range(0, cards.Count);
+		Card c = (Card) cards[x];
+		cards.RemoveAt(x);
+		return c;
 	}
 }
     

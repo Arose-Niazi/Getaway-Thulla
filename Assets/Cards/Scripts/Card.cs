@@ -13,6 +13,5 @@
 			Name = name;
 			Deck = deck;
 			Image = file;
-			Debug.Log(Image);
 		}
 	}
