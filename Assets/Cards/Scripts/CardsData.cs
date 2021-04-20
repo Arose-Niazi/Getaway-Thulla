@@ -59,6 +59,11 @@ public class CardsData : MonoBehaviour
 	{
 	    CardBack = new Card("Card Back", Back, 0, Decks.NONE);
 	    
+	    AceOfSpades   = new Card("Ace of Spades",         AS,        14,        Decks.SPADES);
+	    AceOfHearts   = new Card("Ace of Hearts",         AH,        14,        Decks.HEART);
+	    AceOfDiamonds = new Card("Ace of Diamonds",       AD,        14,        Decks.DIAMOND);
+	    AceOfClovers  = new Card("Ace of Clovers",        AC,        14,        Decks.CLOVER);
+	    
 	    KingOfSpades   = new Card("King of Spades",         KS,    13,       Decks.SPADES);
 	    KingOfHearts   = new Card("King of Hearts",         KH,    13,        Decks.HEART);
 	    KingOfDiamonds = new Card("King of Diamonds",     KD,    13,        Decks.DIAMOND);
@@ -118,12 +123,7 @@ public class CardsData : MonoBehaviour
 	    TwoOfHearts   = new Card("2 of Hearts",         H2,        2,        Decks.HEART);
 	    TwoOfDiamonds = new Card("2 of Diamonds",       D2,        2,        Decks.DIAMOND);
 	    TwoOfClovers  = new Card("2 of Clovers",        C2,        2,        Decks.CLOVER);
-	    
-	    AceOfSpades   = new Card("Ace of Spades",         AS,        14,        Decks.SPADES);
-	    AceOfHearts   = new Card("Ace of Hearts",         AH,        14,        Decks.HEART);
-	    AceOfDiamonds = new Card("Ace of Diamonds",       AD,        14,        Decks.DIAMOND);
-	    AceOfClovers  = new Card("Ace of Clovers",        AC,        14,        Decks.CLOVER);
-	    
+
 	}
 
 
