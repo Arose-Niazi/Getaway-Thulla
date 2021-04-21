@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using MLAPI;
+using MLAPI.SceneManagement;
+using MLAPI.Transports.UNET;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : NetworkBehaviour
 {
     [SerializeField] public GameObject inputPanel;
     [SerializeField] public Text inputPanelButtonText;
@@ -15,13 +18,19 @@ public class MainMenu : MonoBehaviour
     [SerializeField] public GameObject serversListPanel;
     [SerializeField] public Transform serversListButton;
     [SerializeField] public Transform serversListContentHolder;
-    
     private Discovery _networkDiscoveryScript;
     private bool _asHost;
 
+    private bool _discoverySystemEnabled = false;
+
     private void Start()
     {
-        _networkDiscoveryScript = networkDiscoveryObject.GetComponent<Discovery>();
+        if(_discoverySystemEnabled)
+            _networkDiscoveryScript = networkDiscoveryObject.GetComponent<Discovery>();
+        if(IsServer)
+            NetworkManager.Singleton.StopServer();
+        if(IsClient)
+            NetworkManager.Singleton.StopClient();
     }
 
     public void Join()
@@ -47,16 +56,26 @@ public class MainMenu : MonoBehaviour
 
     public void HostJoin()
     {
-        if(inputPanelInputField.text.Length < 1) return;
+        if (inputPanelInputField.text.Length < 1) return;
+        UserSettings.Name = inputPanelInputField.text;
         if (_asHost)
         {
-            _networkDiscoveryScript.broadcastData = inputPanelInputField.text;
-            _networkDiscoveryScript.StartBroadcast();
+            if (_discoverySystemEnabled)
+            {
+                _networkDiscoveryScript.broadcastData = inputPanelInputField.text;
+                _networkDiscoveryScript.StartBroadcast();
+            }
+
+            NetworkManager.Singleton.StartHost();
             return;
         }
-        
-        ServersList();
-        
+
+        if (_discoverySystemEnabled)
+        {
+            ServersList();
+            return;
+        }
+        JoinServer("127.0.0.1");
     }
 
     public void ServersList()
@@ -82,6 +101,8 @@ public class MainMenu : MonoBehaviour
 
     private void JoinServer(string ip)
     {
+        NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = ip;
+        NetworkManager.Singleton.StartClient();
         Debug.Log("Trying to join " + ip);
     }
     public void Quit()
