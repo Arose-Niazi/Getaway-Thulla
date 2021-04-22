@@ -28,33 +28,21 @@ public class PlayerHandSpawn : MonoBehaviour
 
     public void CreateHandOf(int[] ids)
     {
-        var xOffset = 10;
         var rOffset = 10;
-        var yOffset = 2f;
+        var center = ids.Length / 2;
         for (int i = 0; i < ids.Length; i++)
         {
             var cardButton = Instantiate(cardObject, cardObjectParent, false);
-            if (i < ids.Length / 2)
+            cardButton.transform.localPosition = new Vector3(-440,-240);
+            if (i < center)
             {
-                var x = -440 - (ids.Length / 2 - i) * xOffset;
-                var y = -240 - (ids.Length / 2 - i) * yOffset;
-                var r = (ids.Length / 2 - i) * rOffset;
-                cardButton.transform.localPosition = new Vector3(x,y);
-                //Debug.Log($"Spawning Card at ({x},{y})");
+                var r = (center - i) * rOffset;
                 cardButton.Rotate(new Vector3(0f,0f,r));
             }
-            else if (i > ids.Length / 2)
+            else if (i > center)
             {
-                var x = -440 + (i - ids.Length / 2) * xOffset;
-                var y = -240 - (i - ids.Length / 2) * yOffset;
-                var r = (i - ids.Length / 2) * -rOffset;
-                cardButton.transform.localPosition = new Vector3(x,y);
-                //Debug.Log($"Spawning Card at ({x},{y})");
+                var r = (i - center) * -rOffset;
                 cardButton.Rotate(new Vector3(0f,0f,r));
-            }
-            else
-            {
-                cardButton.transform.localPosition = new Vector3(-440,-240);
             }
             var id = ids[i];
             Card card = _cardsData.GetCardByID(id);
