@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -54,6 +55,7 @@ public class CardsData : MonoBehaviour
 	public Card AceOfClovers ;
 
 	private ArrayList cards = new ArrayList();
+	private Dictionary<int, Card> _allCards = new Dictionary<int, Card>();
 
 	private void Awake()
 	{
@@ -130,6 +132,10 @@ public class CardsData : MonoBehaviour
 	public void Start()
 	{
 		ResetCards();
+		foreach (Card card in cards)
+		{
+			_allCards.Add(card.ID, card);
+		}
 	}
 
 	public void ResetCards()
@@ -207,6 +213,13 @@ public class CardsData : MonoBehaviour
 		Card c = (Card) cards[x];
 		cards.RemoveAt(x);
 		return c;
+	}
+
+	public Card GetCardByID(int id)
+	{
+		Card card;
+		_allCards.TryGetValue(id, out card);
+		return card;
 	}
 }
     
