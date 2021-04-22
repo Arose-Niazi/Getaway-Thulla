@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -28,6 +29,7 @@ public class PlayerHandSpawn : MonoBehaviour
 
     public void CreateHandOf(int[] ids)
     {
+        Array.Sort(ids, CardsSort);
         var rOffset = 10;
         var center = ids.Length / 2;
         for (int i = 0; i < ids.Length; i++)
@@ -51,7 +53,19 @@ public class PlayerHandSpawn : MonoBehaviour
             cardButton.GetComponent<Button>().onClick.AddListener(delegate { CardSelect(id);  });
         }
     }
-    
+
+    private int CardsSort(int one, int two)
+    {
+        Card card1 = _cardsData.GetCardByID(one);
+        Card card2 = _cardsData.GetCardByID(two);
+
+        int diff = card1.Deck - card2.Deck;
+        if (diff == 0)
+        {
+            diff = card2.Value - card1.Value;
+        }
+        return diff;
+    }
     
 
     public void CardSelect(int cardID)
