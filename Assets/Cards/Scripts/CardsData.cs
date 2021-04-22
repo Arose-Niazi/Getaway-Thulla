@@ -217,8 +217,7 @@ public class CardsData : MonoBehaviour
 
 	public Card GetCardByID(int id)
 	{
-		Card card;
-		_allCards.TryGetValue(id, out card);
+		_allCards.TryGetValue(id, out var card);
 		return card;
 	}
 }
